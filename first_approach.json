@@ -1,0 +1,27 @@
+{
+    "filter": {
+        "nested": {
+            "path": "employments",
+            "filter": {
+                "bool": {
+                    "must": [
+                        {
+                            "term": {
+                                "employments.company_name_not_analyzed": "Google"
+                            }
+                        },
+                        {
+                            "term": {
+                                "employments.current": "0"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fields": [
+        "name"
+    ],
+    "size": 100
+}

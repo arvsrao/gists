@@ -1,0 +1,51 @@
+{
+    "query": {
+        "nested": {
+            "path": "employments",
+            "filter": {
+                "bool": {
+                    "must": [
+                        {
+                            "term": {
+                                "employments.company.name_not_analyzed": "Google"
+                            }
+                        },
+                        {
+                            "term": {
+                                "employments.current": "0"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "filter": {
+        "nested": {
+            "path": "employments",
+            "filter": {
+                "bool": {
+                    "must_not": [
+                        {
+                            "term": {
+                                "employments.company.name_not_analyzed": "Google"
+                            }
+                        },
+                        {
+                            "term": {
+                                "employments.current": "1"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fields": [
+        "name",
+        "id",
+        "employments.company.name",
+        "employments.current"
+    ],
+    "size": 200
+}
